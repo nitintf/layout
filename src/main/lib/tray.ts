@@ -1,4 +1,4 @@
-import { BrowserWindow, Menu, Tray, app, globalShortcut } from 'electron'
+import { Menu, Tray, app, globalShortcut } from 'electron'
 import AlignmentManager from './alignment'
 import icon from '../../../resources/16x16.png?asset'
 import { AppConfig, Command } from '@shared/types'
@@ -54,13 +54,13 @@ export default class TrayBuilder {
       },
       ...generalMenuOptions,
       {
+        type: 'separator'
+      },
+      {
         label: 'Preferences',
         click: () => {
           this.createWindow()
         }
-      },
-      {
-        type: 'separator'
       },
       {
         label: 'Check for updates'
