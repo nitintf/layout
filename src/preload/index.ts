@@ -1,4 +1,4 @@
-import { contextBridge } from 'electron'
+import { contextBridge, ipcRenderer } from 'electron'
 
 if (!process.contextIsolated) {
   throw new Error('contextIsolation must be enabled in the BrowserWindow')
@@ -6,7 +6,8 @@ if (!process.contextIsolated) {
 
 try {
   contextBridge.exposeInMainWorld('context', {
-    locale: navigator.language
+    locale: navigator.language,
+    getAppConfig: () => ipcRenderer.invoke('get-app-config')
   })
 } catch (error) {
   console.error(error)

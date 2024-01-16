@@ -4,18 +4,20 @@ interface Props {
   title: string
   icon: React.ReactNode
   active: boolean
+  onClick: () => void
   className?: string
 }
 
-export const NavBarItem: React.FC<Props> = ({ active, icon, title, className }) => {
+export const NavBarItem: React.FC<Props> = ({ active, icon, title, onClick, className }) => {
   return (
-    <div
-      className={`flex items-center px-4 py-2 rounded-md cursor-pointer mb-1 ${
-        active ? 'bg-zinc-500/30' : 'hover:bg-zinc-500/20'
+    <button
+      onClick={onClick}
+      className={`flex items-center px-4 py-2 rounded-md cursor-pointer mb-2 w-full ${
+        active ? 'bg-zinc-400/40' : 'hover:bg-zinc-500/20'
       } ${className}`}
     >
       {icon}
       <span className="ml-2 text-sm font-medium">{title}</span>
-    </div>
+    </button>
   )
 }

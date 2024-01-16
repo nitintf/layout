@@ -1,8 +1,9 @@
-import { app, shell, BrowserWindow } from 'electron'
+import { app, shell, BrowserWindow, ipcRenderer, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import TrayBuilder from './lib/tray'
+import { getAppConfig } from './lib'
 
 let mainWindow: BrowserWindow | null = null
 let tray: TrayBuilder | null = null
@@ -69,6 +70,9 @@ app.whenReady().then(() => {
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
   })
+
+  // add context actions
+  ipcMain.handle('get-app-config', async () => getAppConfig())
 
   createTray(createWindow)
 
