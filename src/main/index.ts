@@ -3,7 +3,8 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import TrayBuilder from './lib/tray'
-import { getAppConfig } from './lib'
+import { getAppConfig, updateAppConfig } from './lib'
+import { AppConfig } from '@shared/types'
 
 let mainWindow: BrowserWindow | null = null
 let tray: TrayBuilder | null = null
@@ -73,6 +74,7 @@ app.whenReady().then(() => {
 
   // add context actions
   ipcMain.handle('get-app-config', async () => getAppConfig())
+  ipcMain.handle('update-app-config', async (_, config: AppConfig) => updateAppConfig(config))
 
   createTray(createWindow)
 

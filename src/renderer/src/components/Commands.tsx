@@ -1,26 +1,18 @@
 import React, { useEffect } from 'react'
 import { Command, Commands as CommandsI } from '@shared/types'
-import { config } from '@shared/config'
 import { CommandItem } from './CommandItem'
 
-export const Commands: React.FC = () => {
-  const [commands, setCommands] = React.useState<CommandsI>({
-    ...config.commands
-  })
+interface Props {
+  commands: CommandsI | undefined
+}
 
-  const loadConfig = async () => {
-    const data = await window.context.getAppConfig()
-    setCommands(data.commands)
-  }
-
-  useEffect(() => {
-    loadConfig()
-  }, [])
+export const Commands: React.FC<Props> = ({ commands }) => {
+  if (!commands) return null
 
   return (
     <div className="mt-2">
       {/* <Input placeholder="Search Commands..." className="w-1/2" /> */}
-
+      <h1 className="text-2xl font-bold mt-2">Commands</h1>
       <section className="mt-4">
         <ul className="mt-2 flex gap-3 flex-col">
           {Object.keys(commands).map((key) => (

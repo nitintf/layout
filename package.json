@@ -22,9 +22,11 @@
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.0",
     "@electron-toolkit/utils": "^3.0.0",
+    "@radix-ui/react-switch": "^1.0.3",
     "clsx": "^2.1.0",
     "electron-updater": "^6.1.7",
     "fs-extra": "^11.2.0",
+    "jotai": "^2.6.2",
     "tailwind-merge": "^2.2.0"
   },
   "devDependencies": {

@@ -71,8 +71,10 @@ export const config: AppConfig = {
     ]
   },
   general: {
-    description: 'A simple window manager for macOS',
-    name: 'Flow',
+    checkForUpdates: false,
+    gapSize: 0,
+    hideMenuIcon: false,
+    launchOnLogin: false,
     version: '0.0.1'
   }
 }

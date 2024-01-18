@@ -5,6 +5,7 @@ declare global {
     context: {
       locale: string
       getAppConfig: () => Promise<AppConfig>
+      updateAppConfig: (config: AppConfig) => Promise<void>
     }
   }
 }

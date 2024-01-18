@@ -1,9 +1,11 @@
 import { ActionType } from './actions'
 
 export interface GeneralSettings {
-  name: string
+  launchOnLogin: boolean
+  hideMenuIcon: boolean
+  checkForUpdates: boolean
+  gapSize: number
   version: string
-  description: string
 }
 
 export interface Command {
