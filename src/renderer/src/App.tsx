@@ -2,19 +2,19 @@ import { useState } from 'react'
 import { Content, DraggableTopBar, RootLayout, Sidebar, NavBarItem, Commands } from './components'
 import { PiCommandFill } from 'react-icons/pi'
 import { RiSettings2Fill } from 'react-icons/ri'
-import { MdOutlineTipsAndUpdates } from 'react-icons/md'
+import { GrAppsRounded } from 'react-icons/gr'
 import { GeneralSettings } from './components/GeneralSettings'
-import Button from './components/ui/Button'
 import { useAppConfig } from './hooks/useAppConfig'
 
 enum NavBarItemType {
   COMMANDS = 'Commands',
-  GENERAL = 'General'
+  GENERAL = 'General',
+  APPS = 'Apps'
 }
 
 function App(): JSX.Element {
   const { config } = useAppConfig()
-  const [active, setActive] = useState<NavBarItemType>(NavBarItemType.COMMANDS)
+  const [active, setActive] = useState<NavBarItemType>(NavBarItemType.GENERAL)
 
   const handleNavBarItemClick = (item: NavBarItemType) => {
     setActive(item)
@@ -26,20 +26,27 @@ function App(): JSX.Element {
       <RootLayout>
         <Sidebar className="relative">
           <NavBarItem
+            title={NavBarItemType.GENERAL}
+            active={active === NavBarItemType.GENERAL}
+            icon={<RiSettings2Fill size={17} />}
+            onClick={() => handleNavBarItemClick(NavBarItemType.GENERAL)}
+          />
+          <NavBarItem
             title={NavBarItemType.COMMANDS}
             active={active === NavBarItemType.COMMANDS}
             icon={<PiCommandFill size={17} />}
             onClick={() => handleNavBarItemClick(NavBarItemType.COMMANDS)}
           />
           <NavBarItem
-            title={NavBarItemType.GENERAL}
-            active={active === NavBarItemType.GENERAL}
-            icon={<RiSettings2Fill size={17} />}
-            onClick={() => handleNavBarItemClick(NavBarItemType.GENERAL)}
+            title={NavBarItemType.APPS}
+            active={active === NavBarItemType.APPS}
+            icon={<GrAppsRounded size={17} />}
+            onClick={() => handleNavBarItemClick(NavBarItemType.APPS)}
+            className="px-6"
           />
-          <Button className="absolute bottom-4 left-4 w-[85%]" Icon={MdOutlineTipsAndUpdates}>
+          {/* <Button className="absolute bottom-4 left-4 w-[85%]" Icon={MdOutlineTipsAndUpdates}>
             Check for updates
-          </Button>
+          </Button> */}
         </Sidebar>
         <Content>
           {active === NavBarItemType.COMMANDS && <Commands commands={config?.commands} />}

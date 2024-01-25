@@ -9,7 +9,8 @@ try {
   contextBridge.exposeInMainWorld('context', {
     locale: navigator.language,
     getAppConfig: () => ipcRenderer.invoke('get-app-config'),
-    updateAppConfig: (config: AppConfig) => ipcRenderer.invoke('update-app-config', config)
+    updateAppConfig: (config: AppConfig) => ipcRenderer.invoke('update-app-config', config),
+    resetAppConfig: () => ipcRenderer.invoke('reset-app-config')
   })
 } catch (error) {
   console.error(error)

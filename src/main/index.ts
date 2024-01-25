@@ -1,9 +1,9 @@
-import { app, shell, BrowserWindow, ipcRenderer, ipcMain } from 'electron'
+import { app, shell, BrowserWindow, dialog, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import TrayBuilder from './lib/tray'
-import { getAppConfig, updateAppConfig } from './lib'
+import { getAppConfig, resetAppConfig, updateAppConfig } from './lib'
 import { AppConfig } from '@shared/types'
 
 let mainWindow: BrowserWindow | null = null
@@ -29,7 +29,7 @@ function createWindow(): void {
     vibrancy: 'under-window',
     visualEffectState: 'active',
     titleBarStyle: 'hidden',
-    trafficLightPosition: { x: 15, y: 10 },
+    trafficLightPosition: { x: 10, y: 10 },
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: true,
@@ -75,6 +75,7 @@ app.whenReady().then(() => {
   // add context actions
   ipcMain.handle('get-app-config', async () => getAppConfig())
   ipcMain.handle('update-app-config', async (_, config: AppConfig) => updateAppConfig(config))
+  ipcMain.handle('reset-app-config', async () => resetAppConfig())
 
   createTray(createWindow)
 

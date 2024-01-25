@@ -1,10 +1,25 @@
 import { configAtom } from '@renderer/store'
 import { useAtomValue, useSetAtom } from 'jotai'
 import { Commands, GeneralSettings } from '@shared/types'
+import { config as defaultConfig } from '@shared/config'
+import { useEffect } from 'react'
 
 export const useAppConfig = () => {
   const config = useAtomValue(configAtom)
   const setConfig = useSetAtom(configAtom)
+
+  useEffect(() => {
+    if (!config) return
+    window.context.updateAppConfig(config)
+  }, [config])
+
+  const resetConfig = () => {
+    window.context.resetAppConfig().then((response) => {
+      if (response) {
+        setConfig(defaultConfig)
+      }
+    })
+  }
 
   const updateCommandsConfig = (newCommands: Commands) => {
     if (config) {
@@ -24,5 +39,5 @@ export const useAppConfig = () => {
     }
   }
 
-  return { config, updateCommandsConfig, updateGeneralConfig }
+  return { config, updateCommandsConfig, updateGeneralConfig, resetConfig }
 }

@@ -11,16 +11,14 @@ interface Props {
 }
 
 export const GeneralSettings: React.FC<Props> = ({ config }) => {
-  const { updateGeneralConfig } = useAppConfig()
+  const { updateGeneralConfig, resetConfig } = useAppConfig()
 
   console.log('config :>> ', config)
 
   return (
     <div className="mt-2">
-      <h1 className="text-2xl font-bold mt-2">General</h1>
-
       <div className="mt-4 flex gap-3 flex-col">
-        <div className="flex flex-col gap-2 border-[1px] border-zinc-600/60 rounded-lg py-5 px-6 bg-zinc-700/20">
+        <div className="flex flex-col gap-2 border-[1px] border-zinc-500/70 rounded-lg py-5 px-6 bg-zinc-700/20">
           <SettingsItem>
             <SettingsItem.Label>Launch on login</SettingsItem.Label>
             <SettingsItem.Action>
@@ -52,7 +50,7 @@ export const GeneralSettings: React.FC<Props> = ({ config }) => {
           </SettingsItem>
         </div>
 
-        <div className="flex flex-col gap-2 border-[1px] border-zinc-600/60 rounded-lg py-5 px-6 bg-zinc-700/20">
+        <div className="flex flex-col gap-2 border-[1px] border-zinc-500/70 rounded-lg py-5 px-6 bg-zinc-700/20">
           <SettingsItem hideBorder>
             <SettingsItem.Label>Gaps between windows</SettingsItem.Label>
             <SettingsItem.Action>
@@ -70,7 +68,7 @@ export const GeneralSettings: React.FC<Props> = ({ config }) => {
         </div>
 
         <div className="flex items-center justify-between mt-2">
-          <Button>Reset to defaults shortcuts</Button>
+          <Button onClick={resetConfig}>Reset to defaults settings</Button>
           <div className="flex flex-row gap-2">
             <Button Icon={CiImport}>Import</Button>
             <Button Icon={CiExport}>Export</Button>

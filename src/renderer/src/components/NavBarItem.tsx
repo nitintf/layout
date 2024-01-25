@@ -12,12 +12,12 @@ export const NavBarItem: React.FC<Props> = ({ active, icon, title, onClick, clas
   return (
     <button
       onClick={onClick}
-      className={`flex items-center px-4 py-2 rounded-md cursor-pointer mb-2 w-full ${
+      className={`flex flex-col gap-1 items-center px-2 py-1 rounded-md cursor-pointer mb-3 ${
         active ? 'bg-zinc-400/40' : 'hover:bg-zinc-500/20'
       } ${className}`}
     >
       {icon}
-      <span className="ml-2 text-sm font-medium">{title}</span>
+      <span className="text-sm font-medium">{title}</span>
     </button>
   )
 }
