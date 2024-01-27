@@ -2,9 +2,9 @@ import React from 'react'
 import { SettingsItem } from './SettingsItem'
 import { Switch } from './ui/Switch'
 import Button from './ui/Button'
-import { CiImport, CiExport } from 'react-icons/ci'
 import { GeneralSettings as GeneralSettingConfig } from '@shared/types'
 import { useAppConfig } from '@renderer/hooks/useAppConfig'
+import { PinTopIcon, PinBottomIcon } from '@radix-ui/react-icons'
 
 interface Props {
   config: GeneralSettingConfig | undefined
@@ -68,8 +68,8 @@ export const GeneralSettings: React.FC<Props> = ({ config }) => {
         <div className="flex items-center justify-between mt-2">
           <Button onClick={resetConfig}>Reset to defaults settings</Button>
           <div className="flex flex-row gap-2">
-            <Button Icon={CiImport}>Import</Button>
-            <Button Icon={CiExport}>Export</Button>
+            <Button Icon={PinTopIcon}>Import</Button>
+            <Button Icon={PinBottomIcon}>Export</Button>
           </div>
         </div>
       </div>

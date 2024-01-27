@@ -1,11 +1,9 @@
 import { useState } from 'react'
 import { Content, DraggableTopBar, RootLayout, Sidebar, NavBarItem } from './components'
-import { PiCommandFill } from 'react-icons/pi'
-import { RiSettings2Fill } from 'react-icons/ri'
-import { GrAppsRounded } from 'react-icons/gr'
 import { GeneralSettings } from './components/GeneralSettings'
 import { useAppConfig } from './hooks/useAppConfig'
 import { Commands } from './components/commands'
+import { GearIcon, DashboardIcon, AspectRatioIcon } from '@radix-ui/react-icons'
 
 enum NavBarItemType {
   COMMANDS = 'Commands',
@@ -29,19 +27,19 @@ function App(): JSX.Element {
           <NavBarItem
             title={NavBarItemType.GENERAL}
             active={active === NavBarItemType.GENERAL}
-            icon={<RiSettings2Fill size={17} />}
+            icon={<GearIcon className="w-4 h-4" />}
             onClick={() => handleNavBarItemClick(NavBarItemType.GENERAL)}
           />
           <NavBarItem
             title={NavBarItemType.COMMANDS}
             active={active === NavBarItemType.COMMANDS}
-            icon={<PiCommandFill size={17} />}
+            icon={<AspectRatioIcon className="w-4 h-4" />}
             onClick={() => handleNavBarItemClick(NavBarItemType.COMMANDS)}
           />
           <NavBarItem
             title={NavBarItemType.APPS}
             active={active === NavBarItemType.APPS}
-            icon={<GrAppsRounded size={17} />}
+            icon={<DashboardIcon className="w-4 h-4" />}
             onClick={() => handleNavBarItemClick(NavBarItemType.APPS)}
             className="px-6"
           />

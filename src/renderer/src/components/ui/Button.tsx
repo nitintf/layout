@@ -1,9 +1,9 @@
+import { IconProps } from '@radix-ui/react-icons/dist/types'
 import { cn } from '@renderer/utils'
 import React, { ButtonHTMLAttributes } from 'react'
-import { IconType } from 'react-icons'
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  Icon?: IconType
+  Icon?: React.FC<IconProps>
 }
 
 const Button: React.FC<ButtonProps> = ({ children, className, Icon, ...props }) => {
