@@ -12,7 +12,7 @@
 
     @apply select-none;
 
-    @apply bg-transparent;
+    @apply bg-black/30;
 
     @apply antialiased text-white;
 

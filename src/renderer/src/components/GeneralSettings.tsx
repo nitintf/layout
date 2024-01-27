@@ -13,8 +13,6 @@ interface Props {
 export const GeneralSettings: React.FC<Props> = ({ config }) => {
   const { updateGeneralConfig, resetConfig } = useAppConfig()
 
-  console.log('config :>> ', config)
-
   return (
     <div className="mt-2">
       <div className="mt-4 flex gap-3 flex-col">

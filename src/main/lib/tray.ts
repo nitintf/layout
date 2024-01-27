@@ -1,4 +1,4 @@
-import { Menu, Tray, app, globalShortcut } from 'electron'
+import { BrowserWindow, Menu, Tray, app, globalShortcut } from 'electron'
 import AlignmentManager from './alignment'
 import icon from '../../../resources/16x16.png?asset'
 import { AppConfig, Command } from '@shared/types'
@@ -59,6 +59,12 @@ export default class TrayBuilder {
       {
         label: 'Preferences',
         click: () => {
+          const window = BrowserWindow.getAllWindows()[0]
+          if (window) {
+            window.center()
+            window.focus()
+            return
+          }
           this.createWindow()
         }
       },

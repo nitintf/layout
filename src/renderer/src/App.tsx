@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { Content, DraggableTopBar, RootLayout, Sidebar, NavBarItem, Commands } from './components'
+import { Content, DraggableTopBar, RootLayout, Sidebar, NavBarItem } from './components'
 import { PiCommandFill } from 'react-icons/pi'
 import { RiSettings2Fill } from 'react-icons/ri'
 import { GrAppsRounded } from 'react-icons/gr'
 import { GeneralSettings } from './components/GeneralSettings'
 import { useAppConfig } from './hooks/useAppConfig'
+import { Commands } from './components/commands'
 
 enum NavBarItemType {
   COMMANDS = 'Commands',
@@ -51,6 +52,7 @@ function App(): JSX.Element {
         <Content>
           {active === NavBarItemType.COMMANDS && <Commands commands={config?.commands} />}
           {active === NavBarItemType.GENERAL && <GeneralSettings config={config?.general} />}
+          {active === NavBarItemType.APPS && <div>Apps</div>}
         </Content>
       </RootLayout>
     </>

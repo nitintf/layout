@@ -13,6 +13,7 @@ export interface Command {
   shortcut: string
   action: ActionType
   icon: string
+  enabled: boolean
 }
 
 export interface Commands {
