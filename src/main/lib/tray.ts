@@ -2,23 +2,16 @@ import { BrowserWindow, Menu, Tray, app, globalShortcut } from 'electron'
 import AlignmentManager from './alignment'
 import icon from '../../../resources/16x16.png?asset'
 import { AppConfig, Command } from '@shared/types'
-import { getAppConfig } from './config'
-import { config as defaultConfig } from '@shared/config'
 
 export default class TrayBuilder {
   createWindow: () => void
   alignmentManager: AlignmentManager
-  config: AppConfig = defaultConfig
+  config: AppConfig
 
-  constructor(createWindow: () => void) {
+  constructor(createWindow: () => void, config: AppConfig) {
     this.createWindow = createWindow
     this.alignmentManager = new AlignmentManager()
-
-    this.initConfig()
-  }
-
-  async initConfig() {
-    this.config = await getAppConfig()
+    this.config = config
   }
 
   createOption(command: Command): Electron.MenuItemConstructorOptions | Electron.MenuItem {

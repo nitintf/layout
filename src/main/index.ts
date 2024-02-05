@@ -9,9 +9,10 @@ import { AppConfig } from '@shared/types'
 let mainWindow: BrowserWindow | null = null
 let tray: TrayBuilder | null = null
 
-function createTray(createWindow: () => void) {
+async function createTray(createWindow: () => void) {
+  const config = await getAppConfig()
   if (!tray) {
-    tray = new TrayBuilder(createWindow)
+    tray = new TrayBuilder(createWindow, config)
     tray.buildTray()
   }
 }
