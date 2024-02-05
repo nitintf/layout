@@ -3,6 +3,7 @@ const keyIcons = {
   Control: { mac: '⌃', win: 'Ctrl' },
   Option: { mac: '⌥', win: 'Alt' },
   Command: { mac: '⌘', win: 'Win' },
+  Meta: { mac: '⌘', win: 'Win' },
   Shift: { mac: '⇧', win: 'Shift' },
   Alt: { mac: 'Option', win: 'Alt' },
   Win: { mac: 'Cmd', win: 'Win' },
@@ -31,7 +32,6 @@ const keyIcons = {
   Tab: '⇥',
   Escape: 'Esc',
   CapsLock: '⇪'
-  // Add more keys as needed
 }
 
 export function shortcutToIcons(shortcut: string, os = 'mac') {

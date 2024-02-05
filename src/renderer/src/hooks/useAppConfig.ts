@@ -1,8 +1,9 @@
 import { configAtom } from '@renderer/store'
 import { useAtomValue, useSetAtom } from 'jotai'
-import { Commands, GeneralSettings } from '@shared/types'
+import { CommandKey, Commands, GeneralSettings } from '@shared/types'
 import { config as defaultConfig } from '@shared/config'
 import { useEffect } from 'react'
+import { ActionType } from '@shared/actions'
 
 export const useAppConfig = () => {
   const config = useAtomValue(configAtom)
@@ -21,9 +22,31 @@ export const useAppConfig = () => {
     })
   }
 
-  const updateCommandsConfig = (newCommands: Commands) => {
-    if (config) {
-      setConfig((prevConfig) => ({ ...prevConfig, commands: newCommands }))
+  const updateCommandsConfig = (
+    action: ActionType,
+    key: CommandKey,
+    newValue: string | boolean
+  ) => {
+    if (!config) return
+
+    // Iterate over each command category
+    for (const commandCategoryKey in config.commands) {
+      const commandCategory = config.commands[commandCategoryKey as keyof Commands]
+
+      if (!commandCategory) continue
+
+      // Find the command with the matching label
+      const commandIndex = commandCategory?.findIndex((command) => command.action === action)
+
+      // If the command is found, update it
+      if (commandIndex !== undefined && commandIndex !== -1) {
+        const updatedCommand = { ...commandCategory[commandIndex], [key]: newValue }
+        const updatedCommandCategory = [...commandCategory]
+        updatedCommandCategory[commandIndex] = updatedCommand
+
+        const updatedConfig = { ...config.commands, [commandCategoryKey]: updatedCommandCategory }
+        setConfig(() => ({ ...config, commands: updatedConfig }))
+      }
     }
   }
 

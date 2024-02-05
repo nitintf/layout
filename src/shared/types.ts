@@ -30,3 +30,5 @@ export interface AppConfig {
   general: GeneralSettings
   commands: Commands
 }
+
+export type CommandKey = keyof Command
