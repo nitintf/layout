@@ -1,4 +1,4 @@
-import { cn, wait } from '@renderer/utils'
+import { cn } from '@renderer/utils'
 import { shortcutToIcons } from '@renderer/utils/keys'
 import React, { LegacyRef, useEffect, useRef } from 'react'
 import { Popover, PopoverContent, PopoverTrigger } from './popover'

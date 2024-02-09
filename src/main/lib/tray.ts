@@ -7,6 +7,7 @@ export default class TrayBuilder {
   createWindow: () => void
   alignmentManager: AlignmentManager
   config: AppConfig
+  tray: Tray | null = null
 
   constructor(createWindow: () => void, config: AppConfig) {
     this.createWindow = createWindow
@@ -15,21 +16,43 @@ export default class TrayBuilder {
   }
 
   createOption(command: Command): Electron.MenuItemConstructorOptions | Electron.MenuItem {
-    const menuItem = {
+    const menuItem: Electron.MenuItemConstructorOptions | Electron.MenuItem = {
       label: command.label,
       click: () => {
         this.alignmentManager.align(command.action)
       },
-      accelerator: command.shortcut
+      accelerator: command.shortcut,
+      enabled: command.enabled
     }
 
-    globalShortcut.register(command.shortcut, menuItem.click)
+    if (command.enabled) {
+      globalShortcut.register(command.shortcut, () => this.alignmentManager.align(command.action))
+    }
 
     return menuItem
   }
 
-  buildTray(): Tray {
-    const tray = new Tray(icon)
+  removeAllShortcuts(): void {
+    this.config.commands.half.forEach((command) => {
+      globalShortcut.unregister(command.shortcut)
+    })
+
+    this.config.commands.corner.forEach((command) => {
+      globalShortcut.unregister(command.shortcut)
+    })
+
+    this.config.commands.general.forEach((command) => {
+      globalShortcut.unregister(command.shortcut)
+    })
+  }
+
+  reloadTray(newConfig: AppConfig): void {
+    this.removeAllShortcuts()
+    this.config = newConfig
+    this.setTrayMenu()
+  }
+
+  setTrayMenu(): void {
     const menuHalfOptions = this.config.commands.half.map(this.createOption.bind(this))
 
     const cornerMenuOptions = this.config.commands.corner.map(this.createOption.bind(this))
@@ -75,7 +98,13 @@ export default class TrayBuilder {
       }
     ])
 
-    tray.setContextMenu(contextMenu)
+    this.tray?.setContextMenu(contextMenu)
+  }
+
+  buildTray(): Tray {
+    const tray = new Tray(icon)
+    this.tray = tray
+    this.setTrayMenu()
     return tray
   }
 }

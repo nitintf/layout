@@ -5,7 +5,7 @@ const keyIcons = {
   Command: { mac: '⌘', win: 'Win' },
   Meta: { mac: '⌘', win: 'Win' },
   Shift: { mac: '⇧', win: 'Shift' },
-  Alt: { mac: 'Option', win: 'Alt' },
+  Alt: { mac: '⌥', win: 'Alt' },
   Win: { mac: 'Cmd', win: 'Win' },
   // Arrow keys
   Right: '→',
@@ -31,7 +31,8 @@ const keyIcons = {
   Delete: '⌦',
   Tab: '⇥',
   Escape: 'Esc',
-  CapsLock: '⇪'
+  CapsLock: '⇪',
+  Period: '.'
 }
 
 export function shortcutToIcons(shortcut: string, os = 'mac') {

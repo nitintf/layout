@@ -14,9 +14,15 @@ const useHotKeyRecorder = (shouldListen: boolean) => {
   const keyDownListener = (event: KeyboardEvent) => {
     if (event.repeat) return
 
+    console.log('event :>> ', event)
+
     let key = event.key
 
-    if (!MacModifiers.includes(key)) {
+    if (key.startsWith('Arrow')) {
+      key = key.replace('Arrow', '')
+    }
+
+    if (/^[a-zA-Z]$/.test(key)) {
       key = key.toUpperCase()
     }
 
@@ -48,7 +54,11 @@ const useHotKeyRecorder = (shouldListen: boolean) => {
     setTimeout(() => {
       let key = event.key
 
-      if (!MacModifiers.includes(key)) {
+      if (key.startsWith('Arrow')) {
+        key = key.replace('Arrow', '')
+      }
+
+      if (/^[a-zA-Z]$/.test(key)) {
         key = key.toUpperCase()
       }
       keysDown.current.delete(key)

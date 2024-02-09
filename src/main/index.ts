@@ -1,4 +1,4 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron'
+import { app, shell, BrowserWindow, ipcMain, webContents } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
@@ -80,7 +80,13 @@ app.whenReady().then(() => {
 
   // add context actions
   ipcMain.handle('get-app-config', async () => getAppConfig())
-  ipcMain.handle('update-app-config', async (_, config: AppConfig) => updateAppConfig(config))
+  ipcMain.handle('update-app-config', async (_, config: AppConfig) => {
+    // TODO: reload tray config after update
+    updateAppConfig(config)
+    if (tray) {
+      tray.reloadTray(config)
+    }
+  })
   ipcMain.handle('reset-app-config', async () => resetAppConfig())
 
   createTray(createWindow)
