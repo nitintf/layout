@@ -4,6 +4,7 @@ import { Checkbox } from '../ui/CheckBox'
 import { Hotkey } from '../ui/Hotkey'
 import { useAppConfig } from '@renderer/hooks/useAppConfig'
 import { cn } from '@renderer/utils'
+import { renderCommandIcon } from './icons'
 
 export const commandsColumnDefs: ColumnDef<Command>[] = [
   {
@@ -15,10 +16,11 @@ export const commandsColumnDefs: ColumnDef<Command>[] = [
       const isDisabled = !info.row.original.enabled
       return (
         <div
-          className={cn('text-xs font-semibold text-slate-100', {
+          className={cn('text-xs font-semibold text-slate-100 flex gap-2 items-center', {
             'text-opacity-30': isDisabled
           })}
         >
+          {renderCommandIcon(info.row.original.action)}
           {info.getValue()}
         </div>
       )

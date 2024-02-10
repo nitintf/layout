@@ -7,35 +7,35 @@ export const config: AppConfig = {
       {
         label: 'Left Half',
         shortcut: 'Control+Option+Left',
-        icon: 'icons/left-half.png',
+        icon: 'third-left.png',
         action: ActionType.LeftHalf,
         enabled: true
       },
       {
         label: 'Right Half',
         shortcut: 'Control+Option+Right',
-        icon: 'icons/right-half.png',
+        icon: 'third-right.png',
         action: ActionType.RightHalf,
         enabled: true
       },
       {
         label: 'Top Half',
         shortcut: 'Control+Option+Up',
-        icon: 'icons/top-half.png',
+        icon: 'top-half.png',
         action: ActionType.TopHalf,
         enabled: true
       },
       {
         label: 'Bottom Half',
         shortcut: 'Control+Option+Down',
-        icon: 'icons/bottom-half.png',
+        icon: 'bottom-half.png',
         action: ActionType.BottomHalf,
         enabled: true
       },
       {
         label: 'Center Half',
         shortcut: 'Control+Option+C',
-        icon: 'icons/center-half.png',
+        icon: 'third-center.png',
         action: ActionType.CenterHalf,
         enabled: true
       }
@@ -44,28 +44,28 @@ export const config: AppConfig = {
       {
         label: 'Top Left',
         shortcut: 'Control+Option+1',
-        icon: 'icons/top-left.png',
+        icon: 'top-left.png',
         action: ActionType.TopLeft,
         enabled: true
       },
       {
         label: 'Top Right',
         shortcut: 'Control+Option+2',
-        icon: 'icons/top-right.png',
+        icon: 'top-right.png',
         action: ActionType.TopRight,
         enabled: true
       },
       {
         label: 'Bottom Left',
         shortcut: 'Control+Option+3',
-        icon: 'icons/bottom-left.png',
+        icon: 'bottom-left.png',
         action: ActionType.BottomLeft,
         enabled: true
       },
       {
         label: 'Bottom Right',
         shortcut: 'Control+Option+4',
-        icon: 'icons/bottom-right.png',
+        icon: 'bottom-right.png',
         action: ActionType.BottomRight,
         enabled: true
       }
@@ -74,7 +74,7 @@ export const config: AppConfig = {
       {
         label: 'Maximize',
         shortcut: 'Control+Option+M',
-        icon: 'icons/maximize.png',
+        icon: 'maximize.png',
         action: ActionType.Maximize,
         enabled: true
       }
