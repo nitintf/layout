@@ -1,4 +1,4 @@
-import { BrowserWindow, Menu, Tray, app, globalShortcut } from 'electron'
+import { BrowserWindow, Menu, Tray, app } from 'electron'
 import AlignmentManager from './alignment'
 import icon from '../../../resources/16x16.png?asset'
 import { AppConfig, Command } from '@shared/types'
