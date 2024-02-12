@@ -5,14 +5,14 @@ import { AppConfig, Command } from '@shared/types'
 
 export default class TrayBuilder {
   createWindow: () => void
-  alignmentManager: AlignmentManager
-  config: AppConfig
-  tray: Tray | null = null
+  private readonly alignmentManager: AlignmentManager
+  private config: AppConfig
+  private tray: Tray | null = null
 
-  constructor(createWindow: () => void, config: AppConfig) {
+  constructor(createWindow: () => void, config: AppConfig, alignmentManager: AlignmentManager) {
     this.createWindow = createWindow
-    this.alignmentManager = new AlignmentManager()
     this.config = config
+    this.alignmentManager = alignmentManager
   }
 
   createOption(command: Command): Electron.MenuItemConstructorOptions | Electron.MenuItem {
@@ -25,31 +25,19 @@ export default class TrayBuilder {
       enabled: command.enabled
     }
 
-    if (command.enabled) {
-      globalShortcut.register(command.shortcut, () => this.alignmentManager.align(command.action))
-    }
-
     return menuItem
   }
 
-  removeAllShortcuts(): void {
-    this.config.commands.half.forEach((command) => {
-      globalShortcut.unregister(command.shortcut)
-    })
-
-    this.config.commands.corner.forEach((command) => {
-      globalShortcut.unregister(command.shortcut)
-    })
-
-    this.config.commands.general.forEach((command) => {
-      globalShortcut.unregister(command.shortcut)
-    })
-  }
-
   reloadTray(newConfig: AppConfig): void {
-    this.removeAllShortcuts()
     this.config = newConfig
-    this.setTrayMenu()
+    if (this.config.general.hideMenuIcon) {
+      this.tray?.destroy()
+      this.tray = null
+    } else {
+      if (!this.tray) {
+        this.buildTray()
+      }
+    }
   }
 
   setTrayMenu(): void {
@@ -101,10 +89,8 @@ export default class TrayBuilder {
     this.tray?.setContextMenu(contextMenu)
   }
 
-  buildTray(): Tray {
-    const tray = new Tray(icon)
-    this.tray = tray
+  buildTray() {
+    this.tray = new Tray(icon)
     this.setTrayMenu()
-    return tray
   }
 }
