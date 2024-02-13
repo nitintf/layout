@@ -37,6 +37,7 @@ export default class TrayBuilder {
       if (!this.tray) {
         this.buildTray()
       }
+      this.setTrayMenu()
     }
   }
 

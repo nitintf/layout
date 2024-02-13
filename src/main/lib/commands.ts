@@ -21,7 +21,7 @@ export default class CommandsManager {
     Object.keys(this.config.commands).forEach((commandGroup) => {
       if (!this.ignoreList.includes(commandGroup)) {
         this.config.commands[commandGroup].forEach((command: Command) => {
-          if (!command.shortcut) return
+          if (!command.shortcut || !command.enabled) return
           globalShortcut.register(command.shortcut, () => {
             this.execute(command.action)
           })
