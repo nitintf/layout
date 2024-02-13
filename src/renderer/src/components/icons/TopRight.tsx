@@ -11,7 +11,7 @@ export default function TopRight(props: SVGProps<SVGSVGElement>) {
         xmlns="http://www.w3.org/2000/svg"
         {...props}
       >
-        <rect width="190" height="190" rx="53" fill="#F28585" />
+        <rect width="190" height="190" rx="53" fill="#3b82f6" />
         <rect
           x="65.2501"
           y="89.1134"

@@ -11,7 +11,7 @@ export default function TopLeft(props: SVGProps<SVGSVGElement>) {
         xmlns="http://www.w3.org/2000/svg"
         {...props}
       >
-        <rect width="190" height="190" rx="53" fill="#F28585" />
+        <rect width="190" height="190" rx="53" fill="#3b82f6" />
         <rect
           x="19.2501"
           y="90.0018"

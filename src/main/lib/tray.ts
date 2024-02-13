@@ -79,6 +79,9 @@ export default class TrayBuilder {
         label: 'About'
       },
       {
+        type: 'separator'
+      },
+      {
         label: 'Quit',
         click: () => {
           app.quit()
