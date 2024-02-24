@@ -20,7 +20,7 @@ export const commandsColumnDefs: ColumnDef<Command>[] = [
             'text-opacity-30': isDisabled
           })}
         >
-          {renderCommandIcon(info.row.original.action)}
+          {renderCommandIcon(info.row.original.action, isDisabled)}
           {info.getValue()}
         </div>
       )
@@ -39,7 +39,7 @@ export const commandsColumnDefs: ColumnDef<Command>[] = [
             'text-opacity-50': isDisabled
           })}
         >
-          Command
+          Window
         </div>
       )
     }

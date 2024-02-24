@@ -31,7 +31,7 @@ const commandIcons: Record<ActionType, React.ElementType> = {
   [ActionType.Maximize]: Maximize
 }
 
-export const renderCommandIcon = (actionType: ActionType) => {
+export const renderCommandIcon = (actionType: ActionType, isDisabled: boolean) => {
   const Icon = commandIcons[actionType]
-  return <Icon width={15} height={15} />
+  return <Icon width={15} height={15} opacity={isDisabled ? '0.5' : '1'} />
 }

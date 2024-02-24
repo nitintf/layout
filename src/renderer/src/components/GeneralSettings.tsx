@@ -5,6 +5,7 @@ import Button from './ui/Button'
 import { GeneralSettings as GeneralSettingConfig } from '@shared/types'
 import { useAppConfig } from '@renderer/hooks/useAppConfig'
 import { PinTopIcon, PinBottomIcon } from '@radix-ui/react-icons'
+import { GapRangeSlider } from './GapRangeSlider'
 
 interface Props {
   config: GeneralSettingConfig | undefined
@@ -51,16 +52,11 @@ export const GeneralSettings: React.FC<Props> = ({ config }) => {
         <div className="flex flex-col gap-2 border-[1px] border-zinc-500/70 rounded-lg py-5 px-6 bg-zinc-700/20">
           <SettingsItem hideBorder>
             <SettingsItem.Label>Gaps between windows</SettingsItem.Label>
-            <SettingsItem.Action>
-              <input
-                type="range"
-                min="0"
-                max="100"
-                value={config?.gapSize}
-                onChange={(event) => updateGeneralConfig('gapSize', event.target.valueAsNumber)}
-                className="bg-zinc-500 appearance-none h-0 rounded-full w-full py-[1.5px]"
+            <SettingsItem.Action classNames="">
+              <GapRangeSlider
+                gapSize={config?.gapSize || 0}
+                setGapSize={(size) => updateGeneralConfig('gapSize', size)}
               />
-              <span className="text-xs text-slate-300 ml-1">{config?.gapSize}px</span>
             </SettingsItem.Action>
           </SettingsItem>
         </div>

@@ -1,13 +1,18 @@
 import { ActionType } from '@shared/actions'
+import { AppConfig } from '@shared/types'
 import { execSync } from 'child_process'
 import { screen } from 'electron'
 
 export default class Alignment {
-  screenWidth: number
-  screenHeight: number
+  private screenWidth: number
+  private screenHeight: number
+  private menuBarHeight = 22
+  private gapSize: number
+  private windowsTracker = new Map<ActionType, boolean>()
   alignmentActions: { [key in ActionType]?: () => void }
 
-  constructor() {
+  constructor(config: AppConfig) {
+    this.gapSize = config.general.gapSize
     const mainScreen = screen.getPrimaryDisplay()
     this.screenWidth = mainScreen.workArea.width
     this.screenHeight = mainScreen.workArea.height
@@ -23,13 +28,13 @@ export default class Alignment {
       [ActionType.BottomLeft]: this.alignBottomLeft.bind(this),
       [ActionType.BottomRight]: this.alignBottomRight.bind(this),
       [ActionType.Maximize]: this.alignMaximize.bind(this)
-      // [ActionType.Center]: () => this.alignCenter()
     }
   }
 
-  private execAlignmentScript(script: string, alignment: string): void {
+  private execAlignmentScript(script: string, alignment: ActionType): void {
     try {
       execSync(`osascript -e '${script}'`)
+      this.windowsTracker.set(alignment, true)
     } catch (error) {
       console.error(
         `Error executing AppleScript for alignment ${alignment}:`,
@@ -45,19 +50,23 @@ export default class Alignment {
     }
   }
 
+  reloadConfig(config: AppConfig): void {
+    this.gapSize = config.general.gapSize
+  }
+
   alignLeft(): void {
+    const gapSize = this.gapSize
     const script = `
-      tell application "System Events"
-        set frontmostProcess to first process whose frontmost is true
-        set frontWindow to front window of frontmostProcess
+    tell application "System Events"
+      set frontmostProcess to first process whose frontmost is true
+      set frontWindow to front window of frontmostProcess
 
-        -- Set position to {0, 0} (align left) and size to {screenWidth / 2, screen height}
-        set position of frontWindow to {0, 0}
-        set size of frontWindow to {${this.screenWidth / 2}, ${this.screenHeight}}
-      end tell
-    `
+      set position of frontWindow to {${gapSize}, ${this.menuBarHeight + this.gapSize}}
+      set size of frontWindow to {${this.screenWidth / 2 - 2 * gapSize}, ${this.screenHeight - 2 * gapSize}}
+    end tell
+  `
 
-    this.execAlignmentScript(script, 'left')
+    this.execAlignmentScript(script, ActionType.LeftHalf)
   }
 
   alignRight(): void {
@@ -66,13 +75,12 @@ export default class Alignment {
         set frontmostProcess to first process whose frontmost is true
         set frontWindow to front window of frontmostProcess
 
-        -- Set position to {screenWidth / 2, 0} (align right) and size to {screenWidth / 2, screen height}
-        set position of frontWindow to {${this.screenWidth / 2}, 0}
-        set size of frontWindow to {${this.screenWidth / 2}, ${this.screenHeight}}
+        set position of frontWindow to {${this.screenWidth / 2}, ${this.menuBarHeight + this.gapSize}}
+        set size of frontWindow to {${this.screenWidth / 2 - this.gapSize}, ${this.screenHeight - 2 * this.gapSize}}
       end tell
     `
 
-    this.execAlignmentScript(script, 'right')
+    this.execAlignmentScript(script, ActionType.RightHalf)
   }
 
   alignTopHalf(): void {
@@ -81,13 +89,12 @@ export default class Alignment {
         set frontmostProcess to first process whose frontmost is true
         set frontWindow to front window of frontmostProcess
 
-        -- Set position to {0, 0} (align left) and size to {screenWidth / 2, screen height}
-        set position of frontWindow to {0, 0}
-        set size of frontWindow to {${this.screenWidth}, ${this.screenHeight / 2}}
+        set position of frontWindow to {${this.gapSize}, ${this.menuBarHeight + this.gapSize}}
+        set size of frontWindow to {${this.screenWidth - 2 * this.gapSize}, ${this.screenHeight / 2 - 2 * this.gapSize}}
       end tell
     `
 
-    this.execAlignmentScript(script, 'top')
+    this.execAlignmentScript(script, ActionType.TopHalf)
   }
 
   alignBottomHalf(): void {
@@ -96,13 +103,12 @@ export default class Alignment {
         set frontmostProcess to first process whose frontmost is true
         set frontWindow to front window of frontmostProcess
 
-        -- Set position to {0, screenHeight / 2} (align bottom) and size to {screenWidth, screenHeight / 2}
-        set position of frontWindow to {0, ${this.screenHeight / 2}}
-        set size of frontWindow to {${this.screenWidth}, ${this.screenHeight / 2}}
+        set position of frontWindow to {${this.gapSize}, ${this.screenHeight / 2 + 2 * this.gapSize}}
+        set size of frontWindow to {${this.screenWidth - 2 * this.gapSize}, ${this.screenHeight / 2 - this.gapSize}}
       end tell
     `
 
-    this.execAlignmentScript(script, 'bottom')
+    this.execAlignmentScript(script, ActionType.BottomHalf)
   }
 
   alignMaximize(): void {
@@ -111,13 +117,12 @@ export default class Alignment {
         set frontmostProcess to first process whose frontmost is true
         set frontWindow to front window of frontmostProcess
 
-        -- Set position to {0, 0} (align left) and size to {screenWidth / 2, screen height}
-        set position of frontWindow to {0, 0}
-        set size of frontWindow to {${this.screenWidth}, ${this.screenHeight}}
+        set position of frontWindow to {${this.gapSize}, ${this.menuBarHeight + this.gapSize}}
+        set size of frontWindow to {${this.screenWidth - 2 * this.gapSize}, ${this.screenHeight - this.gapSize}}
       end tell
     `
 
-    this.execAlignmentScript(script, 'maximize')
+    this.execAlignmentScript(script, ActionType.Maximize)
   }
 
   alignCenterHalf(): void {
@@ -132,7 +137,7 @@ export default class Alignment {
       end tell
     `
 
-    this.execAlignmentScript(script, 'center')
+    this.execAlignmentScript(script, ActionType.CenterHalf)
   }
 
   alignTopLeft(): void {
@@ -147,7 +152,7 @@ export default class Alignment {
       end tell
     `
 
-    this.execAlignmentScript(script, 'top-left')
+    this.execAlignmentScript(script, ActionType.TopLeft)
   }
 
   alignBottomLeft(): void {
@@ -162,7 +167,7 @@ export default class Alignment {
       end tell
     `
 
-    this.execAlignmentScript(script, 'bottom-left')
+    this.execAlignmentScript(script, ActionType.BottomLeft)
   }
 
   alignTopRight(): void {
@@ -177,7 +182,7 @@ export default class Alignment {
       end tell
     `
 
-    this.execAlignmentScript(script, 'top-right')
+    this.execAlignmentScript(script, ActionType.TopRight)
   }
 
   alignBottomRight(): void {
@@ -192,7 +197,7 @@ export default class Alignment {
       end tell
     `
 
-    this.execAlignmentScript(script, 'bottom-right')
+    this.execAlignmentScript(script, ActionType.BottomRight)
   }
 
   alignCenter(): void {
@@ -213,6 +218,6 @@ export default class Alignment {
       end tell
     `
 
-    this.execAlignmentScript(script, 'center')
+    this.execAlignmentScript(script, ActionType.CenterHalf)
   }
 }

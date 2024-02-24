@@ -1,5 +1,10 @@
 import { cn } from '@renderer/utils'
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren, ReactNode } from 'react'
+
+export interface ActionProps {
+  children: ReactNode
+  classNames?: string
+}
 
 export const SettingsItem = ({
   children,
@@ -25,8 +30,8 @@ export const Label = ({ children, subLabel }: PropsWithChildren & { subLabel?: s
   )
 }
 
-export const Action = ({ children }: PropsWithChildren) => {
-  return <div className="flex items-center gap-2">{children}</div>
+export const Action = ({ children, classNames }: PropsWithChildren<ActionProps>) => {
+  return <div className={cn('flex items-center gap-2', classNames)}>{children}</div>
 }
 
 SettingsItem.Label = Label

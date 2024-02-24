@@ -63,7 +63,7 @@ class App {
 
   async init() {
     this.config = await getAppConfig()
-    this.alignment = new Alignment()
+    this.alignment = new Alignment(this.config)
 
     this.tray = new TrayBuilder(this.createWindow, this.config, this.alignment)
     if (!this.config.general.hideMenuIcon) {
@@ -83,6 +83,7 @@ class App {
       this.config = config
       this.tray?.reloadTray(config)
       this.commandsManager?.reloadCommands(config)
+      this.alignment?.reloadConfig(config)
 
       // Set the app to launch at login if specified in the config
       if (config.general.launchOnLogin) {
