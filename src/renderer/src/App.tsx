@@ -1,16 +1,15 @@
 import { useState } from 'react'
 import { Content, DraggableTopBar, RootLayout, Sidebar, NavBarItem } from './components'
-import { GeneralSettings } from './components/GeneralSettings'
 import { useAppConfig } from './hooks/useAppConfig'
-import { Commands } from './components/commands'
 import { GearIcon, AspectRatioIcon } from '@radix-ui/react-icons'
+import { WindowsManager, GeneralSettings } from './screens'
 
 enum NavBarItemType {
-  COMMANDS = 'Commands',
+  WINDOWS_MANAGER = 'Windows Manager',
   GENERAL = 'General',
 
   // @TODO: work in progress
-  APPS = 'Apps'
+  APPS_MANAGER = 'Apps Manager'
 }
 
 function App(): JSX.Element {
@@ -33,14 +32,16 @@ function App(): JSX.Element {
             onClick={() => handleNavBarItemClick(NavBarItemType.GENERAL)}
           />
           <NavBarItem
-            title={NavBarItemType.COMMANDS}
-            active={active === NavBarItemType.COMMANDS}
+            title={NavBarItemType.WINDOWS_MANAGER}
+            active={active === NavBarItemType.WINDOWS_MANAGER}
             icon={<AspectRatioIcon className="w-4 h-4" />}
-            onClick={() => handleNavBarItemClick(NavBarItemType.COMMANDS)}
+            onClick={() => handleNavBarItemClick(NavBarItemType.WINDOWS_MANAGER)}
           />
         </Sidebar>
         <Content>
-          {active === NavBarItemType.COMMANDS && <Commands commands={config?.commands} />}
+          {active === NavBarItemType.WINDOWS_MANAGER && (
+            <WindowsManager windowsCommands={config?.windowsCommands} />
+          )}
           {active === NavBarItemType.GENERAL && <GeneralSettings config={config?.general} />}
         </Content>
       </RootLayout>

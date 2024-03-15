@@ -18,9 +18,9 @@ export default class CommandsManager {
   }
 
   registerGlobalShortcuts(): void {
-    Object.keys(this.config.commands).forEach((commandGroup) => {
+    Object.keys(this.config.windowsCommands).forEach((commandGroup) => {
       if (!this.ignoreList.includes(commandGroup)) {
-        this.config.commands[commandGroup].forEach((command: Command) => {
+        this.config.windowsCommands[commandGroup].forEach((command: Command) => {
           if (!command.shortcut || !command.enabled) return
           globalShortcut.register(command.shortcut, () => {
             this.execute(command.action)

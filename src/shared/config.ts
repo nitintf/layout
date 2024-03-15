@@ -2,7 +2,7 @@ import { ActionType } from './actions'
 import { AppConfig } from './types'
 
 export const config: AppConfig = {
-  commands: {
+  windowsCommands: {
     half: [
       {
         label: 'Left Half',

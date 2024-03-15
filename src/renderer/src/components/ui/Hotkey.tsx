@@ -13,7 +13,7 @@ interface HotkeyProps {
   className?: string
 }
 
-export const Hotkey: React.FC<HotkeyProps> = ({ hotkey, className, action }) => {
+const HotkeyComponent: React.FC<HotkeyProps> = ({ hotkey, className, action }) => {
   const ref = useRef<HTMLDivElement>() as LegacyRef<HTMLDivElement> | undefined
 
   const [listenForHotkey, setListenForHotkey] = React.useState(false)
@@ -83,3 +83,5 @@ export const Hotkey: React.FC<HotkeyProps> = ({ hotkey, className, action }) => 
     </div>
   )
 }
+
+export const Hotkey = React.memo(HotkeyComponent, (prev, next) => prev.hotkey === next.hotkey)

@@ -1,12 +1,12 @@
 import { Command } from '@shared/types'
-import { ColumnDef } from '../ui/Table'
-import { Checkbox } from '../ui/CheckBox'
-import { Hotkey } from '../ui/Hotkey'
+import { ColumnDef } from '@renderer/components/Table'
+import { Checkbox } from '@renderer/components/ui/CheckBox'
+import { Hotkey } from '@renderer/components/ui/Hotkey'
 import { useAppConfig } from '@renderer/hooks/useAppConfig'
 import { cn } from '@renderer/utils'
-import { renderCommandIcon } from './icons'
+import { renderCommandIcon } from '@renderer/screens/window-manager/components/icons'
 
-export const commandsColumnDefs: ColumnDef<Command>[] = [
+export const windowsCommandsColumnDefs: ColumnDef<Command>[] = [
   {
     accessor: (row) => row.label,
     id: 'label',

@@ -1,11 +1,11 @@
 import React from 'react'
-import { SettingsItem } from './SettingsItem'
-import { Switch } from './ui/Switch'
-import Button from './ui/Button'
+import { SettingsItem } from '@renderer/components/SettingsItem'
+import { Switch } from '@renderer/components/ui/Switch'
+import Button from '@renderer/components/ui/Button'
 import { GeneralSettings as GeneralSettingConfig } from '@shared/types'
 import { useAppConfig } from '@renderer/hooks/useAppConfig'
 import { PinTopIcon, PinBottomIcon } from '@radix-ui/react-icons'
-import { GapRangeSlider } from './GapRangeSlider'
+import { GapRangeSlider } from '@renderer/components/GapRangeSlider'
 
 interface Props {
   config: GeneralSettingConfig | undefined
@@ -24,17 +24,6 @@ export const GeneralSettings: React.FC<Props> = ({ config }) => {
               <Switch
                 checked={config?.launchOnLogin}
                 onCheckedChange={(value) => updateGeneralConfig('launchOnLogin', value)}
-              />
-            </SettingsItem.Action>
-          </SettingsItem>
-          <SettingsItem>
-            <SettingsItem.Label subLabel="When the menu bar icon is hidden, relaunch Layout from finder to open.">
-              Hide menu bar icon
-            </SettingsItem.Label>
-            <SettingsItem.Action>
-              <Switch
-                checked={config?.hideMenuIcon}
-                onCheckedChange={(value) => updateGeneralConfig('hideMenuIcon', value)}
               />
             </SettingsItem.Action>
           </SettingsItem>

@@ -1,34 +1,23 @@
-# flow-wm
+# Flow
 
-An Electron application with React and TypeScript
+Flow is a window management tool for MacOS, built with React and Electron. It allows users to easily manage their open windows and improve their workflow.
 
-## Recommended IDE Setup
+## Installation
+@todo
 
-- [VSCode](https://code.visualstudio.com/) + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+## How to use it
+@todo
 
-## Project Setup
+## Setup for Development
+1. Clone the repository to your local machine.
+2. Navigate to the project directory.
+3. Install the dependencies with `yarn`.
+4. Start the development server with `yarn dev`.
 
-### Install
+## Contribution
+We welcome contributions from everyone. Before you start, please read our [CONTRIBUTING.md](CONTRIBUTING.md) guide.
 
-```bash
-$ yarn
-```
+## Download the App
+You can download the latest version of the app from the [releases](https://github.com/yourusername/yourrepository/releases) page.
 
-### Development
-
-```bash
-$ yarn dev
-```
-
-### Build
-
-```bash
-# For windows
-$ yarn build:win
-
-# For macOS
-$ yarn build:mac
-
-# For Linux
-$ yarn build:linux
-```
+## TODOs

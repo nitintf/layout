@@ -16,7 +16,7 @@ export interface Command {
   enabled: boolean
 }
 
-export interface Commands {
+export interface WindowsCommands {
   half: Command[]
   corner: Command[]
   general: Command[]
@@ -28,7 +28,7 @@ export interface Commands {
 
 export interface AppConfig {
   general: GeneralSettings
-  commands: Commands
+  windowsCommands: WindowsCommands
 }
 
 export type CommandKey = keyof Command

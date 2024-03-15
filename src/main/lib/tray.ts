@@ -42,11 +42,11 @@ export default class TrayBuilder {
   }
 
   setTrayMenu(): void {
-    const menuHalfOptions = this.config.commands.half.map(this.createOption.bind(this))
+    const menuHalfOptions = this.config.windowsCommands.half.map(this.createOption.bind(this))
 
-    const cornerMenuOptions = this.config.commands.corner.map(this.createOption.bind(this))
+    const cornerMenuOptions = this.config.windowsCommands.corner.map(this.createOption.bind(this))
 
-    const generalMenuOptions = this.config.commands.general.map(this.createOption.bind(this))
+    const generalMenuOptions = this.config.windowsCommands.general.map(this.createOption.bind(this))
 
     const contextMenu = Menu.buildFromTemplate([
       ...menuHalfOptions,

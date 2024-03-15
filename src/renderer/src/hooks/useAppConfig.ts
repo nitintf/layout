@@ -1,6 +1,6 @@
 import { configAtom } from '@renderer/store'
 import { useAtomValue, useSetAtom } from 'jotai'
-import { CommandKey, Commands, GeneralSettings } from '@shared/types'
+import { CommandKey, WindowsCommands, GeneralSettings } from '@shared/types'
 import { config as defaultConfig } from '@shared/config'
 import { useEffect } from 'react'
 import { ActionType } from '@shared/actions'
@@ -30,8 +30,8 @@ export const useAppConfig = () => {
     if (!config) return
 
     // Iterate over each command category
-    for (const commandCategoryKey in config.commands) {
-      const commandCategory = config.commands[commandCategoryKey as keyof Commands]
+    for (const commandCategoryKey in config.windowsCommands) {
+      const commandCategory = config.windowsCommands[commandCategoryKey as keyof WindowsCommands]
 
       if (!commandCategory) continue
 
@@ -44,8 +44,11 @@ export const useAppConfig = () => {
         const updatedCommandCategory = [...commandCategory]
         updatedCommandCategory[commandIndex] = updatedCommand
 
-        const updatedConfig = { ...config.commands, [commandCategoryKey]: updatedCommandCategory }
-        setConfig(() => ({ ...config, commands: updatedConfig }))
+        const updatedConfig = {
+          ...config.windowsCommands,
+          [commandCategoryKey]: updatedCommandCategory
+        }
+        setConfig(() => ({ ...config, windowsCommands: updatedConfig }))
       }
     }
   }
