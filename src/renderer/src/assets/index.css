@@ -8,15 +8,7 @@
   }
 
   html, body {
-    @apply h-full;
-
-    @apply select-none;
-
-    @apply bg-black/30;
-
-    @apply antialiased text-white;
-
-    @apply overflow-hidden;
+    @apply h-full select-none bg-black/30 antialiased text-white overflow-hidden; 
   }
 
   header {
@@ -37,23 +29,5 @@
 
   ::-webkit-scrollbar-track {
     @apply bg-transparent;
-  }
-
-  input[type='range']::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 15px;
-  height: 15px;
-  background: #ccc;
-  border-radius: 50%;
-  cursor: pointer;
-  }
-
-  input[type='range']::-moz-range-thumb {
-    width: 15px;
-    height: 15px;
-    background: #ccc;
-    border-radius: 50%;
-    cursor: pointer;
   }
 }

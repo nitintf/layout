@@ -41,7 +41,7 @@ export const GeneralSettings: React.FC<Props> = ({ config }) => {
         <div className="flex flex-col gap-2 border-[1px] border-zinc-500/70 rounded-lg py-5 px-6 bg-zinc-700/20">
           <SettingsItem hideBorder>
             <SettingsItem.Label>Gaps between windows</SettingsItem.Label>
-            <SettingsItem.Action classNames="">
+            <SettingsItem.Action>
               <GapRangeSlider
                 gapSize={config?.gapSize || 0}
                 setGapSize={(size) => updateGeneralConfig('gapSize', size)}
