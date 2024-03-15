@@ -99,14 +99,14 @@ const useHotKeyRecorder = (shouldListen: boolean) => {
       if (result.success) {
         window.removeEventListener('keyup', keyUpListener)
       }
-
-      return () => {
-        window.removeEventListener('keydown', keyDownListener)
-        window.removeEventListener('keyup', keyUpListener)
-      }
     } else {
       if (result.success) return
       setResult({ success: false, combination: [], error: null })
+    }
+
+    return () => {
+      window.removeEventListener('keydown', keyDownListener)
+      window.removeEventListener('keyup', keyUpListener)
     }
   }, [shouldListen, result.success])
 

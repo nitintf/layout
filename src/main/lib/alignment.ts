@@ -118,7 +118,7 @@ export default class Alignment {
         set frontWindow to front window of frontmostProcess
 
         set position of frontWindow to {${this.gapSize}, ${this.menuBarHeight + this.gapSize}}
-        set size of frontWindow to {${this.screenWidth - 2 * this.gapSize}, ${this.screenHeight - this.gapSize}}
+        set size of frontWindow to {${this.screenWidth - 2 * this.gapSize}, ${this.screenHeight - 2 * this.gapSize}}
       end tell
     `
 
