@@ -1,6 +1,6 @@
-# Flow
+# Layout 
 
-Flow is a window management tool for MacOS, built with React and Electron. It allows users to easily manage their open windows and improve their workflow.
+Layout is a window management tool for MacOS, built with React and Electron. It allows users to easily manage their open windows and improve their workflow.
 
 ## Installation
 @todo

@@ -24,7 +24,7 @@ class App {
       autoHideMenuBar: true,
       ...(process.platform === 'linux' ? { icon } : {}),
       center: true,
-      title: 'Flow',
+      title: 'Layout',
       frame: false,
       vibrancy: 'under-window',
       visualEffectState: 'active',
