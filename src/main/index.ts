@@ -39,7 +39,8 @@ class App {
       fullscreenable: false,
       resizable: false,
       modal: true,
-      minimizable: false
+      minimizable: false,
+      icon: icon
     })
 
     this.mainWindow.on('ready-to-show', () => {
@@ -101,10 +102,10 @@ class App {
 
   async start() {
     app.whenReady().then(() => {
-      // if (app.dock) {
-      //   // Check if dock is available (only on macOS)
-      //   app.dock.hide()
-      // }
+      if (app.dock) {
+        // Check if dock is available (only on macOS)
+        app.dock.hide()
+      }
 
       // Set app user model id for windows
       electronApp.setAppUserModelId('com.electron')
