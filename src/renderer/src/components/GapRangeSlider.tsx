@@ -9,7 +9,6 @@ interface GapRangeSliderProps {
 
 export const GapRangeSlider: React.FC<GapRangeSliderProps> = ({ gapSize, setGapSize }) => {
   const handleChange = (value: number | number[]) => {
-    console.log('value:', value)
     setGapSize(Array.isArray(value) ? value[0] : value)
   }
 
@@ -35,12 +34,12 @@ export const GapRangeSlider: React.FC<GapRangeSliderProps> = ({ gapSize, setGapS
           </Tooltip.Trigger>
           <Tooltip.Portal>
             <Tooltip.Content
-              side="bottom"
-              className="bg-zinc-900/70 text-[10px] font-semibold px-2 py-1 rounded-md"
+              side="top"
+              className="bg-zinc-900/90 text-[10px] font-semibold px-2 py-1 rounded-md"
               sideOffset={5}
             >
               {gapSize} px
-              <Tooltip.Arrow className="fill-zinc-900/70" />
+              <Tooltip.Arrow className="fill-zinc-900/90" />
             </Tooltip.Content>
           </Tooltip.Portal>
         </Tooltip.Root>
