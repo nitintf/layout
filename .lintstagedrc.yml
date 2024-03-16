@@ -1,4 +1,4 @@
-"*.{ts,tsx}":
+'*.{ts,tsx}':
   - yarn format
   - yarn lint
   - yarn typecheck
