@@ -28,3 +28,4 @@ npmRebuild: false
 publish:
   provider: github
   releaseType: draft
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
