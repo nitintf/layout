@@ -17,17 +17,17 @@ jobs:
         with:
           node-version-file: .nvmrc
 
-      - name: Cache node_modules
-        id: cache-node_modules
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+      # - name: Cache node_modules
+      #   id: cache-node_modules
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: ~/.npm
+      #     key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-node-
 
       - name: Install dependencies
-        if: steps.cache-node_modules.outputs.cache-hit != 'true'
+        # if: steps.cache-node_modules.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
 
       - name: Build
