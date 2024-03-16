@@ -39,7 +39,7 @@ export default function Table<T extends object>({ columnDefs, data }: TableProps
           size: def.minSize
         })
       ),
-    [columnDefs]
+    [columnDefs, columnHelper]
   )
 
   const table = useReactTable({

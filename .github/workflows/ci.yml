@@ -33,8 +33,17 @@ jobs:
       - name: Build
         run: yarn build:mac
 
-      - name: Test
-        run: yarn test
+      - name: Web unit tests
+        run: yarn test-unit:web
+
+      - name: Node unit tests
+        run: yarn test-unit:node
+
+      - name: Node integration tests
+        run: yarn test-integration:node
+
+      - name: Web integration tests
+        run: yarn test-integration:web
 
   windows:
     runs-on: windows-latest

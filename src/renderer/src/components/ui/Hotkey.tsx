@@ -1,4 +1,4 @@
-import { cn } from '@renderer/utils'
+import { cn, wait } from '@renderer/utils'
 import { shortcutToIcons } from '@renderer/utils/keys'
 import React, { LegacyRef, useEffect, useRef } from 'react'
 import { Popover, PopoverContent, PopoverTrigger } from './popover'
@@ -27,14 +27,15 @@ const HotkeyComponent: React.FC<HotkeyProps> = ({ hotkey, className, action }) =
     const timeoutId = setTimeout(async () => {
       if (result.success) {
         updateCommandsConfig(action, 'shortcut', result.combination.join('+'))
-        // await wait(1000)
+        // wait for the user to see the success message for better UX
+        await wait(700)
         setListenForHotkey(false)
         reset()
       }
     }, 500)
 
     return () => clearTimeout(timeoutId)
-  }, [result.success])
+  }, [result, action, reset, updateCommandsConfig])
 
   console.log('result :>> ', result)
   return (
