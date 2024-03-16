@@ -7,8 +7,9 @@
     @apply h-full;
   }
 
-  html, body {
-    @apply h-full select-none bg-black/30 antialiased text-white overflow-hidden; 
+  html,
+  body {
+    @apply h-full select-none bg-black/30 antialiased text-white overflow-hidden;
   }
 
   header {

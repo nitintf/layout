@@ -1,17 +1,17 @@
 <!doctype html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Layout</title>
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'"
+    />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <title>Layout</title>
-  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-  <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'" />
-</head>
-
-<body class="bg-slate-400/10">
-  <div id="root"></div>
-  <script type="module" src="/src/main.tsx"></script>
-</body>
-
+  <body class="bg-slate-400/10">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
