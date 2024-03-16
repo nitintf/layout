@@ -26,6 +26,6 @@ appImage:
   artifactName: ${name}-${version}.${ext}
 npmRebuild: false
 publish:
-  provider: "github"
+  provider: github
   releaseType: draft
-  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+  private: true
