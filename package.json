@@ -1,10 +1,13 @@
 {
   "name": "layout",
-  "version": "1.0.0",
-  "description": "An Electron application with React and TypeScript",
+  "version": "0.1.0",
+  "description": "Window and App management tool",
   "main": "./out/main/index.js",
-  "author": "example.com",
-  "homepage": "https://electron-vite.org",
+  "author": {
+    "name": "Nitin Panwar",
+    "email": "contact@nitinp.dev"
+  },
+  "homepage": "https://github.com/nitintf/layout",
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
