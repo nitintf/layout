@@ -1,0 +1,6 @@
+"*.{ts,tsx}":
+  - yarn format
+  - yarn lint
+  - yarn typecheck
+'*.{md,json,css,scss}':
+  - yarn format
