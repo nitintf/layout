@@ -2,8 +2,6 @@ name: Build/release
 
 on:
   push:
-    branches:
-      - main
     tags:
       - '*'
 
@@ -13,16 +11,15 @@ jobs:
 
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
+        os: [macos-latest]
 
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v1
 
-      - name: Install Node.js, NPM and Yarn
-        uses: actions/setup-node@v1
+      - uses: actions/setup-node@v4
         with:
-          node-version: 10
+          node-version-file: .nvmrc
 
       - name: Build/release Electron app
         uses: samuelmeuli/action-electron-builder@v1
