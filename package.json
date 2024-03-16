@@ -5,9 +5,11 @@
   "main": "./out/main/index.js",
   "author": {
     "name": "Nitin Panwar",
-    "email": "contact@nitinp.dev"
+    "email": "contact@nitinp.dev",
+    "url": "https://nitinp.dev"
   },
   "homepage": "https://github.com/nitintf/layout",
+  "license": "MIT",
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
@@ -18,9 +20,9 @@
     "dev": "electron-vite dev",
     "build": "npm run typecheck && electron-vite build",
     "postinstall": "electron-builder install-app-deps",
-    "build:win": "npm run build && electron-builder --win --config",
+    "build:win": "echo 'No windows build'",
     "build:mac": "electron-vite build && electron-builder --mac --config",
-    "build:linux": "electron-vite build && electron-builder --linux --config",
+    "build:linux": "echo 'No linux build'",
     "test-unit:web": "echo 'No browser tests'",
     "test-unit:node": "echo 'No node tests'",
     "test-integration:web": "echo 'No browser tests'",
