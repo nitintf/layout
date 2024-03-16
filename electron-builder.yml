@@ -1,6 +1,5 @@
 appId: com.layout.app
 productName: Layout
-forceCodeSigning: true
 directories:
   buildResources: build
 files:
