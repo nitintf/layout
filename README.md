@@ -2,6 +2,8 @@
 
 Layout is a window management tool for MacOS, built with React and Electron. It allows users to easily manage their open windows and improve their workflow.
 
+https://github.com/nitintf/layout/assets/55453926/4fa82933-71fe-4e35-8c05-a1ea86e3dac2
+
 ## Installation
 
 @todo
