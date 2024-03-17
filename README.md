@@ -25,6 +25,6 @@ We welcome contributions from everyone. Before you start, please read our [CONTR
 
 ## Download the App
 
-You can download the latest version of the app from the [releases](https://github.com/yourusername/yourrepository/releases) page.
+You can download the latest version of the app from the [releases](https://github.com/nitintf/layout/releases) page.
 
 ## TODOs
