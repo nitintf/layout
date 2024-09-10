@@ -17,7 +17,7 @@ export const GeneralSettings: React.FC<Props> = ({ config }) => {
   return (
     <div className="mt-2 px-4">
       <div className="mt-4 flex gap-3 flex-col">
-        <div className="flex flex-col gap-2 border-[1px] border-zinc-500/70 rounded-lg py-5 px-6 bg-zinc-700/20">
+        <div className="flex flex-col gap-2 border-[1px] border-zinc-500/40 rounded-lg py-5 px-6 bg-zinc-700/20">
           <SettingsItem>
             <SettingsItem.Label>Launch on login</SettingsItem.Label>
             <SettingsItem.Action>
@@ -38,7 +38,7 @@ export const GeneralSettings: React.FC<Props> = ({ config }) => {
           </SettingsItem>
         </div>
 
-        <div className="flex flex-col gap-2 border-[1px] border-zinc-500/70 rounded-lg py-5 px-6 bg-zinc-700/20">
+        <div className="flex flex-col gap-2 border-[1px] border-zinc-500/40 rounded-lg py-5 px-6 bg-zinc-700/20">
           <SettingsItem hideBorder>
             <SettingsItem.Label>Gaps between windows</SettingsItem.Label>
             <SettingsItem.Action>

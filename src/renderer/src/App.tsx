@@ -5,7 +5,7 @@ import { GearIcon, AspectRatioIcon } from '@radix-ui/react-icons'
 import { WindowsManager, GeneralSettings } from './screens'
 
 enum NavBarItemType {
-  WINDOWS_MANAGER = 'Windows Manager',
+  WINDOWS_MANAGER = 'Windows',
   GENERAL = 'General',
 
   // @TODO: work in progress

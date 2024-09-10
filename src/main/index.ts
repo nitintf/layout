@@ -1,12 +1,12 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron'
-import { join } from 'path'
-import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import icon from '../../resources/icon.png?asset'
-import TrayBuilder from './lib/tray'
-import { getAppConfig, resetAppConfig, updateAppConfig } from './lib'
+import { electronApp, is, optimizer } from '@electron-toolkit/utils'
 import { AppConfig } from '@shared/types'
+import { app, BrowserWindow, ipcMain, shell } from 'electron'
+import { join } from 'path'
+import icon from '../../resources/icon.png?asset'
+import { getAppConfig, resetAppConfig, updateAppConfig } from './lib'
 import Alignment from './lib/alignment'
 import CommandsManager from './lib/commands'
+import TrayBuilder from './lib/tray'
 
 class App {
   private alignment: Alignment | null = null
@@ -22,11 +22,10 @@ class App {
       height: 670,
       show: false,
       autoHideMenuBar: true,
-      ...(process.platform === 'linux' ? { icon } : {}),
       center: true,
       title: 'Layout',
       frame: false,
-      vibrancy: 'under-window',
+      vibrancy: 'hud',
       visualEffectState: 'active',
       titleBarStyle: 'hidden',
       trafficLightPosition: { x: 10, y: 10 },
@@ -102,10 +101,10 @@ class App {
 
   async start() {
     app.whenReady().then(() => {
-      if (app.dock) {
-        // Check if dock is available (only on macOS)
-        app.dock.hide()
-      }
+      // if (app.dock) {
+      //   // Check if dock is available (only on macOS)
+      //   app.dock.hide()
+      // }
 
       // Set app user model id for windows
       electronApp.setAppUserModelId('com.electron')

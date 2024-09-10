@@ -13,7 +13,7 @@ export const Sidebar = ({ className, children, ...props }: ComponentProps<'aside
   return (
     <header
       className={twMerge(
-        'flex gap-2 items-center justify-center mt-7 border-b border-zinc-500/70 overflow-auto',
+        'flex gap-2 items-center justify-center mt-7 border-b border-zinc-500/40 overflow-auto',
         className
       )}
       {...props}

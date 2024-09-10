@@ -1,6 +1,8 @@
 import { useEffect, useState, useRef } from 'react'
+import isAccelerator from 'electron-is-accelerator'
+import { KEY_CODES } from '@shared/keyCodes'
 
-const MacModifiers = ['Control', 'Alt', 'Shift', 'Meta']
+const MacModifiers = ['Control', 'Alt', 'Shift', 'Meta', 'Cmd']
 
 const useHotKeyRecorder = (shouldListen: boolean) => {
   const [result, setResult] = useState<{
@@ -12,22 +14,12 @@ const useHotKeyRecorder = (shouldListen: boolean) => {
   const keysDown = useRef(new Map<string, boolean>())
 
   const keyDownListener = (event: KeyboardEvent) => {
-    if (event.repeat) return
-
-    console.log('event :>> ', event)
-
-    let key = event.key
-
-    if (key.startsWith('Arrow')) {
-      key = key.replace('Arrow', '')
-    }
-
-    if (/^[a-zA-Z]$/.test(key)) {
-      key = key.toUpperCase()
-    }
+    if (event.repeat || event.key === 'Escape') return
+    const key = KEY_CODES[event.keyCode]
 
     setResult((prevResult) => {
       if (prevResult.error) return prevResult
+      console.log('key :>> ', key)
 
       keysDown.current.set(key, true)
       if (
@@ -38,7 +30,7 @@ const useHotKeyRecorder = (shouldListen: boolean) => {
         return {
           success: false,
           combination: [key],
-          error: 'First key must be a MacModifier'
+          error: 'At least one modifier should be included into a hotkey.'
         }
       } else {
         return {
@@ -51,19 +43,22 @@ const useHotKeyRecorder = (shouldListen: boolean) => {
   }
 
   const keyUpListener = (event: KeyboardEvent) => {
+    if (event.key === 'Escape') return
     setTimeout(() => {
-      let key = event.key
+      const key = KEY_CODES[event.keyCode]
 
-      if (key.startsWith('Arrow')) {
-        key = key.replace('Arrow', '')
-      }
-
-      if (/^[a-zA-Z]$/.test(key)) {
-        key = key.toUpperCase()
-      }
       keysDown.current.delete(key)
       setResult((prevResult) => {
         if (prevResult.success) return prevResult
+
+        if (prevResult.error) {
+          keysDown.current.clear()
+          return {
+            ...prevResult,
+            combination: [],
+            error: null
+          }
+        }
 
         return {
           ...prevResult,
@@ -71,7 +66,7 @@ const useHotKeyRecorder = (shouldListen: boolean) => {
           ...(prevResult.combination.length === 1 ? { error: null } : {})
         }
       })
-    }, 700)
+    }, 200)
   }
 
   useEffect(() => {
@@ -82,7 +77,7 @@ const useHotKeyRecorder = (shouldListen: boolean) => {
       firstModifierIndex >= 0 &&
       firstSimpleKeyIndex >= 0 &&
       firstModifierIndex < firstSimpleKeyIndex
-    if (hasModifierBeforeSimpleKey) {
+    if (isAccelerator(newCombination.join('+')) && hasModifierBeforeSimpleKey) {
       setResult((prevResult) => ({
         ...prevResult,
         success: true
@@ -97,7 +92,10 @@ const useHotKeyRecorder = (shouldListen: boolean) => {
 
       // If success is true, remove the listeners
       if (result.success) {
+        window.removeEventListener('keydown', keyDownListener)
         window.removeEventListener('keyup', keyUpListener)
+      } else if (result.error) {
+        window.removeEventListener('keydown', keyDownListener)
       }
     } else {
       if (result.success) return
@@ -108,7 +106,7 @@ const useHotKeyRecorder = (shouldListen: boolean) => {
       window.removeEventListener('keydown', keyDownListener)
       window.removeEventListener('keyup', keyUpListener)
     }
-  }, [shouldListen, result.success])
+  }, [shouldListen, result.success, result.error])
 
   const reset = () => {
     setResult({ success: false, combination: [], error: null })

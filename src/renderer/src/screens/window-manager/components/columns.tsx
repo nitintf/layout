@@ -25,12 +25,15 @@ const HotkeyCell: React.FC<{ info: CellContext<Command, string | number | boolea
 }) => {
   const isDisabled = !info.row.original.enabled
 
+  console.log('info :>> ', info)
+
   return (
     <Hotkey
       action={info.row.original.action}
       hotkey={info.getValue() as string}
+      isDisabled={isDisabled}
       className={cn({
-        'text-opacity-50': isDisabled
+        'text-opacity-30': isDisabled
       })}
     />
   )
@@ -43,7 +46,7 @@ const CommandTypeCell: React.FC<{ info: CellContext<Command, string | number | b
   return (
     <div
       className={cn('text-xs font-semibold text-zinc-400', {
-        'text-opacity-50': isDisabled
+        'text-opacity-30': isDisabled
       })}
     >
       Window

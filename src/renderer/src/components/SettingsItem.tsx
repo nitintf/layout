@@ -13,7 +13,7 @@ export const SettingsItem = ({
   return (
     <div
       className={cn('flex items-center justify-between py-2', {
-        'border-b border-zinc-500/70': !hideBorder
+        'border-b border-zinc-500/40': !hideBorder
       })}
     >
       {children}

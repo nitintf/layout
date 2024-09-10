@@ -3,6 +3,7 @@ const keyIcons = {
   Control: { mac: '⌃', win: 'Ctrl' },
   Option: { mac: '⌥', win: 'Alt' },
   Command: { mac: '⌘', win: 'Win' },
+  Cmd: { mac: '⌘', win: 'Win' },
   Meta: { mac: '⌘', win: 'Win' },
   Shift: { mac: '⇧', win: 'Shift' },
   Alt: { mac: '⌥', win: 'Alt' },
@@ -35,13 +36,19 @@ const keyIcons = {
   Period: '.'
 }
 
+export const KEYS_PRIORITY = ['Control', 'Option', 'Shift', 'Command']
+
 export function shortcutToIcons(shortcut: string, os = 'mac') {
-  return shortcut
-    .split('+')
-    .map((key) => {
-      const icon = keyIcons[key]
-      if (!icon) return key
-      return typeof icon === 'object' ? icon[os] : icon
-    })
-    .join(' ')
+  const keys = shortcut.split('+')
+
+  const priorityKeys = keys.filter((key) => KEYS_PRIORITY.includes(key))
+  const nonPriorityKeys = keys.filter((key) => !KEYS_PRIORITY.includes(key))
+  priorityKeys.sort((a, b) => KEYS_PRIORITY.indexOf(a) - KEYS_PRIORITY.indexOf(b))
+
+  const keysIcons = [...priorityKeys, ...nonPriorityKeys].map((key) => {
+    const icon = keyIcons[key]
+    return !icon ? key : typeof icon === 'object' ? icon[os] : icon
+  })
+
+  return keysIcons.join(' ')
 }

@@ -78,7 +78,11 @@ export const config: AppConfig = {
         action: ActionType.Maximize,
         enabled: true
       }
-    ]
+    ],
+    display: [],
+    edge: [],
+    fourth: [],
+    third: []
   },
   general: {
     checkForUpdates: false,
